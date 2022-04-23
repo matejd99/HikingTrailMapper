@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Akshar:wght@300;500;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Hiking Trail Mapper</title>
+    <link rel="stylesheet" href="loginPageStyle.css">
+    <script src="loginPageJs.js"></script>
+</head>
+
+<body>
+    <img id="logo" src = "hikingTrailMapper.svg" alt="NotFound"/>
+    <div class="Container">
+            <form class="form" id="login" method="post">
+                <h1 id="forTitle">Log in</h1>
+                <label for="userName" class="labels">Username</label>
+                <input id="userName" class="inputFields" type="text" placeholder="Insert Username" autofocus ><br>
+                <label for="password" class="labels">Password</label>
+                <input id="password" class="inputFields" type="password" placeholder="Insert Password"><br>
+                <p class="errorMessage">Wrong username/password Combination</p>
+                <a  class="formLink" href="./"  id="passRst">Forgot Password?</a><br><br>
+                <button type="submit" id="loginButton">Login</button><br><br>
+                <a id="signUpLink" href="./" class="formLink">Not a member? Sign up!</a>
+            </form>
+
+
+    </div>
+</body>
+
+</html>
