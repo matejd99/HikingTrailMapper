@@ -1,12 +1,10 @@
 package me.matej.hikingtrailmapper.repository;
 
 import me.matej.hikingtrailmapper.model.User;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class UserRepository extends JpaRepository<User, Long> {
-
-    User findByUsernName(String userName);
-    User findByUserNameAndPassword(String userName, String password);
-
+public interface UserRepository extends CrudRepository<User, Long> {
+    User findByUserName(String userName);
 }

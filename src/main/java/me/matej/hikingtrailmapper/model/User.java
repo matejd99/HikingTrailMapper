@@ -1,18 +1,46 @@
 package me.matej.hikingtrailmapper.model;
 
-
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Setter
+@Getter
+@Entity
+@Table(name = "user")
 @NoArgsConstructor
-@AllArgsConstructor
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Setter @Getter
-    private String firstName, lastName, userName, password, imagePath;
+    @Column
+    private String firstName;
 
-    @Setter @Getter
-    private int id;
+    @Column
+    private String lastName;
+
+    @Column
+    private String userName;
+
+    @Column
+    private String password;
+
+    @Column
+    private String imagePath;
+
+    @OneToMany(mappedBy = "user")
+    private List<Trail> trails;
+
+    public User(String firstName, String lastName, String userName, String password, String imagePath) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userName = userName;
+        this.password = password;
+        this.imagePath = imagePath;
+    }
 }

@@ -1,28 +1,55 @@
 package me.matej.hikingtrailmapper.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
+
+@Getter
+@Setter
+@Entity
+@Table(name = "user")
 @NoArgsConstructor
-@AllArgsConstructor
 public class Trail {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Setter @Getter
-    private String trailName, trailDescription, suggestedGear;
+    @ManyToOne()
+    private User user;
 
-    @Setter @Getter
+    @Column
+    private String trailName;
+
+    @Column
+    private String trailDescription;
+
+    @Column
+    private String suggestedGear;
+
+    @Column
     private float trailLength;
 
-    @Setter @Getter
+    @Column
     private int hikeDuration;
 
-    @Setter @Getter
+    @Column
     private boolean waterAvailability;
 
-    @Setter @Getter
-    private int id;
-
-
+    public Trail(User user,
+                 String trailName,
+                 String trailDescription,
+                 String suggestedGear,
+                 float trailLength,
+                 int hikeDuration,
+                 boolean waterAvailability) {
+        this.user = user;
+        this.trailName = trailName;
+        this.trailDescription = trailDescription;
+        this.suggestedGear = suggestedGear;
+        this.trailLength = trailLength;
+        this.hikeDuration = hikeDuration;
+        this.waterAvailability = waterAvailability;
+    }
 }
