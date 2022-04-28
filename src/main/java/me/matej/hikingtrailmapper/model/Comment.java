@@ -14,6 +14,4 @@ public class Comment {
 
     @Setter @Getter
     private int id;
-
-
 }
