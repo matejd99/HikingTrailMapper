@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/login")
+@CrossOrigin("*")
 public class LoginController {
     private final UserService userService;
 

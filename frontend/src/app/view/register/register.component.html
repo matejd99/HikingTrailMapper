@@ -1,1 +1,28 @@
-<p>register works!</p>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label>
+      First name:
+      <input formControlName="firstName" placeholder="Your first name" />
+    </label>
+  </div>
+  <div>
+    <label>
+      Last name:
+      <input formControlName="lastName" placeholder="Your last name" />
+    </label>
+  </div>
+  <div>
+    <label>
+      Username:
+      <input formControlName="userName" placeholder="Your username" />
+    </label>
+  </div>
+  <div>
+    <label>
+      Password:
+      <input formControlName="password" placeholder="Your password" />
+    </label>
+  </div>
+  <button type="submit">Register</button>
+  <a routerLink="/log-in">Already have an account?</a>
+</form>

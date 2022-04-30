@@ -1,1 +1,12 @@
-<p>log-in works!</p>
+<form [formGroup]="logInForm" (ngSubmit)="onSubmit()">
+  <label>
+    Username:
+    <input formControlName="userName" placeholder="Your username" />
+  </label>
+  <label>
+    Password:
+    <input formControlName="password" placeholder="Your password" />
+  </label>
+  <button type="submit">Log in</button>
+</form>
+<a routerLink="/register">Dont have an account?</a>

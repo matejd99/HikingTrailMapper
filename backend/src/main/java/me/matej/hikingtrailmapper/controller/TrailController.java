@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/trail")
+@CrossOrigin("*")
 public class TrailController {
     private final TrailService trailService;
 
