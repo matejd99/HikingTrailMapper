@@ -1,6 +1,7 @@
 package me.matej.hikingtrailmapper.controller;
 
 import me.matej.hikingtrailmapper.contracts.CreateTrailRequest;
+import me.matej.hikingtrailmapper.dtos.TrailDto;
 import me.matej.hikingtrailmapper.model.Trail;
 import me.matej.hikingtrailmapper.service.TrailService;
 import org.springframework.web.bind.annotation.*;
@@ -18,27 +19,27 @@ public class TrailController {
     }
 
     @GetMapping
-    public List<Trail> getAll() {
+    public List<TrailDto> getAll() {
         return trailService.getTrails();
     }
 
     @GetMapping("/{userId}")
-    public List<Trail> getMy(@RequestParam Long userId) {
+    public List<TrailDto> getMy(@PathVariable Long userId) {
         return trailService.getMyTrails(userId);
     }
 
     @PostMapping("/{userId}")
-    public Trail create(@RequestParam Long userId, @RequestBody CreateTrailRequest request) {
+    public TrailDto create(@PathVariable Long userId, @RequestBody CreateTrailRequest request) {
         return trailService.createTrail(userId, request);
     }
 
     @PutMapping("/{userId}/{trailId}")
-    public Trail update(@RequestParam Long userId, @RequestParam Long trailId, @RequestBody CreateTrailRequest request) {
+    public TrailDto update(@PathVariable Long userId, @PathVariable Long trailId, @RequestBody CreateTrailRequest request) {
         return trailService.updateTrail(userId, trailId, request);
     }
 
     @DeleteMapping("/{userId}/{trailId}")
-    public Trail delete(@RequestParam Long userId, @RequestParam Long trailId) {
+    public TrailDto delete(@PathVariable Long userId, @PathVariable Long trailId) {
         return trailService.deleteTrail(userId, trailId);
     }
 }

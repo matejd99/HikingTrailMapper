@@ -3,6 +3,7 @@ package me.matej.hikingtrailmapper.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import me.matej.hikingtrailmapper.dtos.UserDto;
 
 import javax.persistence.*;
 import java.util.List;
@@ -36,11 +37,14 @@ public class User {
     private List<Trail> trails;
 
     public User(String firstName, String lastName, String userName, String password, String imagePath) {
-        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.password = password;
         this.imagePath = imagePath;
+    }
+
+    public UserDto toDto() {
+        return new UserDto(id, firstName, lastName, userName, imagePath);
     }
 }

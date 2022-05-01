@@ -1,6 +1,7 @@
 package me.matej.hikingtrailmapper.service.impl;
 
 import me.matej.hikingtrailmapper.contracts.CreateTrailRequest;
+import me.matej.hikingtrailmapper.dtos.TrailDto;
 import me.matej.hikingtrailmapper.model.Trail;
 import me.matej.hikingtrailmapper.model.User;
 import me.matej.hikingtrailmapper.repository.TrailRepository;
@@ -24,17 +25,17 @@ public class TrailServiceImpl implements TrailService {
     }
 
     @Override
-    public List<Trail> getTrails() {
+    public List<TrailDto> getTrails() {
         return toList(trailRepo.findAll());
     }
 
     @Override
-    public List<Trail> getMyTrails(Long userId) {
+    public List<TrailDto> getMyTrails(Long userId) {
         return toList(trailRepo.findByUser_IdIs(userId));
     }
 
     @Override
-    public Trail createTrail(Long userId, CreateTrailRequest request) {
+    public TrailDto createTrail(Long userId, CreateTrailRequest request) {
         Optional<User> user = userRepository.findById(userId);
 
         if (user.isEmpty()) {
@@ -49,13 +50,14 @@ public class TrailServiceImpl implements TrailService {
                 request.getSuggestedGear(),
                 request.getTrailLength(),
                 request.getHikeDuration(),
-                request.isWaterAvailability());
+                request.isWaterAvailability(),
+                request.getPath());
 
-        return trailRepo.save(trail);
+        return trailRepo.save(trail).toDto();
     }
 
     @Override
-    public Trail updateTrail(Long userId, Long trailId, CreateTrailRequest request) {
+    public TrailDto updateTrail(Long userId, Long trailId, CreateTrailRequest request) {
         Optional<User> user = userRepository.findById(userId);
 
         if (user.isEmpty()) {
@@ -81,20 +83,22 @@ public class TrailServiceImpl implements TrailService {
         trail.get().setTrailLength(request.getTrailLength());
         trail.get().setHikeDuration(request.getHikeDuration());
         trail.get().setWaterAvailability(request.isWaterAvailability());
+        trail.get().setPath(request.getPath());
 
-        return trailRepo.save(trail.get());
+        return trailRepo.save(trail.get()).toDto();
     }
 
     @Override
-    public Trail deleteTrail(Long userId, Long trailId) {
+    public TrailDto deleteTrail(Long userId, Long trailId) {
         trailRepo.deleteByUser_IdAndId(userId, trailId);
 
         return null;
     }
 
-    private List<Trail> toList(Iterable<Trail> iter) {
+    private List<TrailDto> toList(Iterable<Trail> iter) {
         return StreamSupport
                 .stream(iter.spliterator(), false)
+                .map((t) -> t.toDto())
                 .collect(Collectors.toList());
     }
 }

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { Trail } from '../contracts/models';
 import { CreateTrailRequest } from '../contracts/requests';
@@ -10,13 +11,13 @@ import { CreateTrailRequest } from '../contracts/requests';
 export class TrailService {
   public trails: BehaviorSubject<Trail[]> = new BehaviorSubject<Trail[]>([]);
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private router: Router) {}
 
   public getTrails(): void {
     this.trails.next([]);
 
     this.httpClient
-      .get<Trail[]>('trails')
+      .get<Trail[]>('http://localhost:7070/trail/')
       .subscribe((trails) => this.trails.next(trails));
   }
 
@@ -24,7 +25,7 @@ export class TrailService {
     this.trails.next([]);
 
     this.httpClient
-      .get<Trail[]>(`trails/${userId}`)
+      .get<Trail[]>(`http://localhost:7070/trail/${userId}`)
       .subscribe((trails) => this.trails.next(trails));
   }
 
@@ -33,6 +34,7 @@ export class TrailService {
       .post<Trail>(`http://localhost:7070/trail/${userId}`, request)
       .subscribe((trail) => {
         this.trails.next(this.trails.value.splice(0, 0, trail));
+        this.router.navigate(['']);
       });
   }
 
@@ -47,6 +49,7 @@ export class TrailService {
         this.trails.next(
           this.trails.value.map((x) => (x.id === trailId ? trail : x))
         );
+        this.router.navigate(['']);
       });
   }
 

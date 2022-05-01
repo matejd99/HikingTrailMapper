@@ -1,6 +1,7 @@
 package me.matej.hikingtrailmapper.service.impl;
 
 import me.matej.hikingtrailmapper.contracts.SignUpRequest;
+import me.matej.hikingtrailmapper.dtos.UserDto;
 import me.matej.hikingtrailmapper.model.User;
 import me.matej.hikingtrailmapper.repository.UserRepository;
 import me.matej.hikingtrailmapper.service.UserService;
@@ -10,25 +11,25 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     @Override
-    public User userLogin(String userName, String password) {
+    public UserDto userLogin(String userName, String password) {
         User user = userRepository.findByUserName(userName);
 
         if (user == null || !user.getPassword().equals(password)) {
 //            throw new UsernameNotFoundException("");
         }
 
-        return user;
+        return user.toDto();
     }
 
     @Override
-    public User signUp(SignUpRequest request) {
+    public UserDto signUp(SignUpRequest request) {
         User user = userRepository.findByUserName(request.getUserName());
 
         if (user != null) {
@@ -47,6 +48,6 @@ public class UserServiceImpl implements UserService {
                 request.getPassword(),
                 "");
 
-        return userRepository.save(user);
+        return userRepository.save(user).toDto();
     }
 }

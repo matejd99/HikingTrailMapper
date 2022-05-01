@@ -2,7 +2,7 @@ package me.matej.hikingtrailmapper.controller;
 
 import me.matej.hikingtrailmapper.contracts.LogInRequest;
 import me.matej.hikingtrailmapper.contracts.SignUpRequest;
-import me.matej.hikingtrailmapper.model.User;
+import me.matej.hikingtrailmapper.dtos.UserDto;
 import me.matej.hikingtrailmapper.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,12 +17,12 @@ public class UserController {
     }
 
     @PostMapping("/sign-up")
-    public User signUp(@RequestBody SignUpRequest request) {
+    public UserDto signUp(@RequestBody SignUpRequest request) {
         return userService.signUp(request);
     }
 
     @PostMapping("/log-in")
-    public User logIn(@RequestBody LogInRequest request) {
+    public UserDto logIn(@RequestBody LogInRequest request) {
         return userService.userLogin(request.getUserName(), request.getPassword());
     }
 }

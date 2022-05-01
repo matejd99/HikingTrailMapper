@@ -1,0 +1,40 @@
+<h1>{{ isUpdate ? "Update trail" : "Create trail" }}</h1>
+<form [formGroup]="trailForm" (ngSubmit)="onSubmit()">
+  <label>
+    Name:
+    <input formControlName="trailName" placeholder="Name" />
+  </label>
+  <label>
+    Description
+    <input formControlName="trailDescription" placeholder="Description" />
+  </label>
+  <label>
+    Path
+    <input formControlName="path" placeholder="Path" />
+  </label>
+  <label>
+    Suggested gear:
+    <input formControlName="suggestedGear" placeholder="Gear" />
+  </label>
+  <label>
+    Trail length:
+    <input type="number" formControlName="trailLength" placeholder="0" />
+  </label>
+  <label>
+    Duration: number
+    <input
+      type="number"
+      formControlName="hikeDuration"
+      placeholder="Duration"
+    />
+  </label>
+  <label>
+    Water availability:
+    <input
+      type="checkbox"
+      formControlName="waterAvailability"
+      placeholder="Your water availability"
+    />
+  </label>
+  <button type="submit">Create trail</button>
+</form>

@@ -8,7 +8,8 @@ import { UserService } from './user.service';
 export class AuthGuardService implements CanActivate {
   constructor(public userService: UserService, public router: Router) {}
   canActivate(): boolean {
-    if (!this.userService.isLogedIn()) {
+    this.userService.refresh();
+    if (!this.userService.isLogedIn) {
       this.router.navigate(['log-in']);
       return false;
     }

@@ -1,5 +1,6 @@
 package me.matej.hikingtrailmapper.controller;
 
+import me.matej.hikingtrailmapper.dtos.UserDto;
 import me.matej.hikingtrailmapper.model.User;
 import me.matej.hikingtrailmapper.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -31,7 +32,7 @@ public class LoginController {
                             @RequestParam String username,
                             @RequestParam String password) {
         try {
-            User user = this.userService.userLogin(username, password);
+            UserDto user = this.userService.userLogin(username, password);
             httpServletRequest.getSession().setAttribute("user", user);
             return "redirect:/home";
         } catch (Exception exception) {

@@ -7,6 +7,7 @@ export interface Trail {
   trailLength: number;
   hikeDuration: number;
   waterAvailability: boolean;
+  path: string;
 }
 
 export interface User {
@@ -14,7 +15,5 @@ export interface User {
   firstName: string;
   lastName: string;
   userName: string;
-  password: string;
   imagePath: string;
-  trails: Trail[];
 }

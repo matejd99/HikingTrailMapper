@@ -10,31 +10,45 @@ export class UserService {
 
   constructor(private httpClient: HttpClient, private router: Router) {}
 
-  public isLogedIn(): boolean {
+  public get isLogedIn(): boolean {
     return !!this.logedInUser;
   }
 
+  public refresh(): void {
+    const user = localStorage.getItem('user');
+
+    if (user !== null) {
+      this.logedInUser = JSON.parse(user);
+    }
+  }
+
   public logIn(request: LogInRequest): void {
-    this.httpClient.post<User>('http://localhost:7070/user/log-in', request).subscribe(
-      (user: User) => {
-        this.logedInUser = user;
-        this.router.navigate(['']);
-      },
-      (err) => {
-        console.error(err);
-      }
-    );
+    this.httpClient
+      .post<User>('http://localhost:7070/user/log-in', request)
+      .subscribe(
+        (user: User) => this.updateUser(user),
+        (err) => console.error(err)
+      );
   }
 
   public signUp(request: SignUpRequest): void {
-    this.httpClient.post<User>('http://localhost:7070/user/sign-up', request).subscribe(
-      (user: User) => {
-        this.logedInUser = user;
-        this.router.navigate(['']);
-      },
-      (err) => {
-        console.error(err);
-      }
-    );
+    this.httpClient
+      .post<User>('http://localhost:7070/user/sign-up', request)
+      .subscribe(
+        (user: User) => this.updateUser(user),
+        (err) => console.error(err)
+      );
+  }
+
+  public logOut(): void {
+    this.logedInUser = undefined;
+    localStorage.clear();
+    this.router.navigate(['']);
+  }
+
+  private updateUser(user: User) {
+    localStorage.setItem('user', JSON.stringify(user));
+    this.logedInUser = user;
+    this.router.navigate(['']);
   }
 }

@@ -1,18 +1,19 @@
 package me.matej.hikingtrailmapper.service;
 
 import me.matej.hikingtrailmapper.contracts.CreateTrailRequest;
+import me.matej.hikingtrailmapper.dtos.TrailDto;
 import me.matej.hikingtrailmapper.model.Trail;
 
 import java.util.List;
 
 public interface TrailService {
-    public List<Trail> getTrails();
+    public List<TrailDto> getTrails();
 
-    public List<Trail> getMyTrails(Long userId);
+    public List<TrailDto> getMyTrails(Long userId);
 
-    public Trail createTrail(Long userId, CreateTrailRequest request);
+    public TrailDto createTrail(Long userId, CreateTrailRequest request);
 
-    public Trail updateTrail(Long userId, Long trailId, CreateTrailRequest request);
+    public TrailDto updateTrail(Long userId, Long trailId, CreateTrailRequest request);
 
-    public Trail deleteTrail(Long userId, Long trailId);
+    public TrailDto deleteTrail(Long userId, Long trailId);
 }

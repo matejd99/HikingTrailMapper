@@ -5,6 +5,7 @@ export interface CreateTrailRequest {
   trailLength: number;
   hikeDuration: number;
   waterAvailability: boolean;
+  path: string;
 }
 
 export interface LogInRequest {

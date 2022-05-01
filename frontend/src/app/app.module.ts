@@ -9,6 +9,8 @@ import { LogInComponent } from './view/log-in/log-in.component';
 import { RegisterComponent } from './view/register/register.component';
 import { NavigationComponent } from './component/navigation/navigation.component';
 import { TrailsComponent } from './view/trails/trails.component';
+import { CreateTrailComponent } from './view/create-trail/create-trail.component';
+import { TrailItemComponent } from './component/trail-item/trail-item.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { TrailsComponent } from './view/trails/trails.component';
     RegisterComponent,
     NavigationComponent,
     TrailsComponent,
+    CreateTrailComponent,
+    TrailItemComponent,
   ],
   imports: [
     BrowserModule,
