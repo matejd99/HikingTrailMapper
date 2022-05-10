@@ -1,0 +1,102 @@
+
+body{
+    --color-primary: #009579;
+    --color-primary-dark: #007f67;
+    --color-secondary: #252c6a;
+    --color-error: red;
+    --color-success: green;
+    --border-radius: 4px;
+
+    margin: 0;
+    height: 100vh;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+
+    font-size: 18px;
+
+    /* background: url("loginBackground.jpg"); */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat ;
+
+}
+
+.Container{
+    width: 400px;
+    max-width: 400px; /*for smaller devices*/
+    margin: 1rem;
+    padding: 2rem;
+    box-shadow: 0 0 40px black;
+    border-radius:var(--border-radius) ;
+    background: white;
+}
+
+.form,
+label
+{
+    color: var(--color-primary-dark);
+    font-family: 'Akshar', sans-serif;
+    font-width: 400;
+}
+
+.errorMessage{
+    color: var(--color-error);
+    text-align: center;
+    font-size:15px;
+}
+
+#forTitle{
+    text-align: center;
+    color: var(--color-primary);
+}
+
+.inputFields{
+    margin-bottom: 1rem;
+    width: 100%;
+    border: 1px solid;
+    background: #eeeeee;
+    padding: 0.75rem;
+    transition: background 0.2s, border-color 0.2s;
+    border-radius: var(--border-radius);
+}
+
+.inputFields:focus{
+    outline: none;
+    border: 2px solid;
+    border-color: var(--color-primary);
+    background: white;
+}
+
+#loginButton, #CreateButton{
+    border-radius: var(--border-radius);
+    border: none;
+    font-size: 1.3rem;
+    font-weight: bold;
+    padding: 1rem 2rem;
+    color: white;
+    background-color: var(--color-primary);
+    width: 100%;
+    cursor: pointer;
+    text-align: center;
+}
+
+#loginButton:hover, #CreateButton.hover{
+    background-color:var(--color-primary-dark) ;
+}
+
+#loginButton:active, #CreateButton.active{
+    transform: scale(0.98 );
+}
+
+.Container{
+    text-align: center;
+}
+
+.labels{
+    float: left;
+}
+
+a{
+    text-decoration: none;
+}

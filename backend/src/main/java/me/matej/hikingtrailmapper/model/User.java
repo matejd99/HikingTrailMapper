@@ -11,7 +11,9 @@ import java.util.List;
 @Setter
 @Getter
 @Entity
-@Table(name = "user")
+@Table(name = "user", uniqueConstraints = {
+        @UniqueConstraint(name = "uc_user_username", columnNames = {"userName"})
+})
 @NoArgsConstructor
 public class User {
     @Id
