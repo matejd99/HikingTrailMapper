@@ -1,5 +1,12 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import * as L from 'leaflet';
+import '@geoman-io/leaflet-geoman-free';
 
 // https://www.digitalocean.com/community/tutorials/angular-angular-and-leaflet
 @Component({
@@ -18,14 +25,27 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.updateTrail();
   }
 
-  @ViewChild("map") mapEl: any;
+  @ViewChild('map') mapEl: any;
 
   constructor() {}
 
   private initMap(): void {
     this.map = L.map(this.mapEl.nativeElement, {
       center: [39.8282, -98.5795],
-      zoom: 3
+      zoom: 3,
+    });
+
+    this.map.pm.addControls({
+      drawMarker: false,
+      drawCircleMarker: false,
+      drawPolyline: true,
+      drawRectangle: false,
+      drawPolygon: false,
+      drawCircle: false,
+      editMode: false,
+      dragMode: false,
+      cutPolygon: false,
+      removalMode: false,
     });
 
     const tiles = L.tileLayer(
@@ -37,6 +57,17 @@ export class MapComponent implements OnInit, AfterViewInit {
           '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       }
     );
+
+    let originalLayer: undefined | L.Layer;
+
+    this.map.on('pm:create', (e) => {
+      if (originalLayer) {
+        originalLayer.remove();
+      }
+      originalLayer = e.layer;
+      console.log(e.layer.toGeoJSON(1));
+      console.log(e);
+    });
 
     this.trailMap = L.geoJSON();
 
