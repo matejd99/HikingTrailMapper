@@ -23,6 +23,11 @@ public class TrailController {
         return trailService.getTrails();
     }
 
+    @GetMapping("one/{trailId}")
+    public TrailDto getOne(@PathVariable Long trailId) {
+        return trailService.getTrail(trailId);
+    }
+
     @GetMapping("/{userId}")
     public List<TrailDto> getMy(@PathVariable Long userId) {
         return trailService.getMyTrails(userId);

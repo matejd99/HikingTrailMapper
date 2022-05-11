@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Trail } from '../contracts/models';
 import { CreateTrailRequest } from '../contracts/requests';
 
@@ -19,6 +19,12 @@ export class TrailService {
     this.httpClient
       .get<Trail[]>('http://localhost:7070/trail/')
       .subscribe((trails) => this.trails.next(trails));
+  }
+
+  public getTrail(trailId: number): Observable<Trail> {
+    return this.httpClient.get<Trail>(
+      `http://localhost:7070/trail/one/${trailId}`
+    );
   }
 
   public getMyTrails(userId: number): void {

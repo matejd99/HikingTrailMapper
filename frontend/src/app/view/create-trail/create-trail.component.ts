@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Trail } from 'src/app/contracts/models';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TrailService } from 'src/app/service/trail.service';
 import { UserService } from 'src/app/service/user.service';
 
@@ -31,7 +30,8 @@ export class CreateTrailComponent implements OnInit {
     private fb: FormBuilder,
     private userService: UserService,
     private trailService: TrailService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   public onSubmit() {
@@ -57,22 +57,26 @@ export class CreateTrailComponent implements OnInit {
     let trailId = this.route.snapshot.queryParams['trailId'];
 
     if (trailId) {
-      let trail: Trail | undefined = this.trailService.trails.value.find(
-        (x) => x.id === trailId
-      );
-      if (trail) {
-        this.updateTrailId = trail.id;
+      this.trailService.getTrail(trailId).subscribe(
+        (trail) => {
+          this.updateTrailId = trail.id;
 
-        this.trailForm.patchValue({
-          trailName: trail.trailName,
-          trailDescription: trail.trailDescription,
-          suggestedGear: trail.suggestedGear,
-          trailLength: trail.trailLength,
-          hikeDuration: trail.hikeDuration,
-          waterAvailability: trail.waterAvailability,
-          path: trail.path,
-        });
-      }
+          this.trailForm.patchValue({
+            trailName: trail.trailName,
+            trailDescription: trail.trailDescription,
+            suggestedGear: trail.suggestedGear,
+            trailLength: trail.trailLength,
+            hikeDuration: trail.hikeDuration,
+            waterAvailability: trail.waterAvailability,
+            path: trail.path,
+          });
+        },
+        (err) => {
+          console.error(err);
+          alert('Trail not found');
+          this.router.navigate(['']);
+        }
+      );
     }
   }
 }

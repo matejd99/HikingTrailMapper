@@ -9,6 +9,12 @@ import { Trail } from 'src/app/contracts/models';
 export class TrailItemComponent implements OnInit {
   @Input('trail') public trail?: Trail;
 
+  public get queryParams() {
+    return {
+      trailId: this.trail?.id,
+    };
+  }
+
   constructor() {}
 
   ngOnInit(): void {}

@@ -30,6 +30,11 @@ public class TrailServiceImpl implements TrailService {
     }
 
     @Override
+    public TrailDto getTrail(Long id) {
+        return trailRepo.findById(id).orElseThrow().toDto();
+    }
+
+    @Override
     public List<TrailDto> getMyTrails(Long userId) {
         return toList(trailRepo.findByUser_IdIs(userId));
     }

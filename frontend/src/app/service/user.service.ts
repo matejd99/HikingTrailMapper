@@ -43,7 +43,7 @@ export class UserService {
   public logOut(): void {
     this.logedInUser = undefined;
     localStorage.clear();
-    this.router.navigate(['']);
+    location.reload();
   }
 
   private updateUser(user: User) {
