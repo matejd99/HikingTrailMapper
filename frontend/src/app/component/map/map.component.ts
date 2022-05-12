@@ -28,6 +28,8 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
   @Output() trailChange = new EventEmitter<any>();
 
+  @Input() public isEditable = true;
+
   @ViewChild('map') mapEl: any;
 
   constructor() {}
@@ -41,7 +43,7 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.map.pm.addControls({
       drawMarker: false,
       drawCircleMarker: false,
-      drawPolyline: true,
+      drawPolyline: this.isEditable,
       drawRectangle: false,
       drawPolygon: false,
       drawCircle: false,
@@ -68,8 +70,6 @@ export class MapComponent implements OnInit, AfterViewInit {
         originalLayer.remove();
       }
       originalLayer = e.layer;
-      console.log(e.layer.toGeoJSON());
-      console.log(e);
       this.trailChange.next(e.layer.toGeoJSON());
     });
 
@@ -85,8 +85,6 @@ export class MapComponent implements OnInit, AfterViewInit {
     if (this._trail && this.trailMap) {
       this.trailMap?.clearLayers();
       this.trailMap?.addData(this._trail);
-      console.log("Here");
-      console.log(this.trailMap.getBounds());
       this.map?.fitBounds(this.trailMap.getBounds());
     }
   }

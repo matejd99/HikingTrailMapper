@@ -1,9 +1,13 @@
 <div *ngIf="trail">
+  <app-map [(trail)]="trailPath" [isEditable]="false"></app-map>
+
   id: {{ trail.id }}, user: {{ trail.user | json }}, trailName:
   {{ trail.trailName }}, trailDescription: {{ trail.trailDescription }},
   suggestedGear: {{ trail.suggestedGear }}, trailLength:
   {{ trail.trailLength }}, hikeDuration: {{ trail.hikeDuration }},
   waterAvailability: {{ trail.waterAvailability }}
 
-  <a routerLink="/update-trail" [queryParams]="queryParams">Update trail</a>
+  <a routerLink="/update-trail" *ngIf="canEdit" [queryParams]="queryParams"
+    >Update trail</a
+  >
 </div>

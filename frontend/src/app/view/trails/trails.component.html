@@ -1,3 +1,5 @@
 <app-navigation></app-navigation>
 <a routerLink="/create-trail">Create trail</a>
-<trail-item *ngFor="let t of trails" [trail]="t"> </trail-item>
+<div class="trailGrid">
+  <trail-item *ngFor="let t of trails" [trail]="t"> </trail-item>
+</div>
