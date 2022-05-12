@@ -1,6 +1,6 @@
 .trailGrid {
   display: grid;
   align-items: center;
-  grid-template-columns: repeat(auto-fit, 300px);
+  grid-template-columns: repeat(auto-fit, 350px);
   width: 100vw;
 }

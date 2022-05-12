@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
                 request.getLastName(),
                 request.getUserName(),
                 request.getPassword(),
-                "");
+                request.getImageUrl());
 
         return userRepository.save(user).toDto();
     }

@@ -12,6 +12,7 @@ export class RegisterComponent implements OnInit {
     lastName: [''],
     userName: [''],
     password: [''],
+    imageUrl: [''],
   });
 
   constructor(private fb: FormBuilder, private userService: UserService) {}
