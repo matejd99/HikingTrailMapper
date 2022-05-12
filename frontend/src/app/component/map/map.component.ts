@@ -1,8 +1,10 @@
 import {
   AfterViewInit,
   Component,
+  EventEmitter,
   Input,
   OnInit,
+  Output,
   ViewChild,
 } from '@angular/core';
 import * as L from 'leaflet';
@@ -24,6 +26,7 @@ export class MapComponent implements OnInit, AfterViewInit {
     this._trail = trail;
     this.updateTrail();
   }
+  @Output() trailChange = new EventEmitter<any>();
 
   @ViewChild('map') mapEl: any;
 
@@ -31,8 +34,8 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   private initMap(): void {
     this.map = L.map(this.mapEl.nativeElement, {
-      center: [39.8282, -98.5795],
-      zoom: 3,
+      center: [41.990659, 21.37946],
+      zoom: 16,
     });
 
     this.map.pm.addControls({
@@ -65,8 +68,9 @@ export class MapComponent implements OnInit, AfterViewInit {
         originalLayer.remove();
       }
       originalLayer = e.layer;
-      console.log(e.layer.toGeoJSON(1));
+      console.log(e.layer.toGeoJSON());
       console.log(e);
+      this.trailChange.next(e.layer.toGeoJSON());
     });
 
     this.trailMap = L.geoJSON();
@@ -81,7 +85,9 @@ export class MapComponent implements OnInit, AfterViewInit {
     if (this._trail && this.trailMap) {
       this.trailMap?.clearLayers();
       this.trailMap?.addData(this._trail);
-      this.map?.flyTo(this.trailMap.getBounds().getCenter());
+      console.log("Here");
+      console.log(this.trailMap.getBounds());
+      this.map?.fitBounds(this.trailMap.getBounds());
     }
   }
 

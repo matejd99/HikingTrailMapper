@@ -12,31 +12,44 @@
 <a routerLink="/register">Dont have an account?</a>
  -->
 
-
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Akshar:wght@300;500;700&display=swap" rel="stylesheet">
-    <meta charset="UTF-8">
-    <!-- <title>Hiking Trail Mapper</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Akshar:wght@300;500;700&display=swap"
+  rel="stylesheet"
+/>
+<meta charset="UTF-8" />
+<!-- <title>Hiking Trail Mapper</title>
     <link rel="stylesheet" href="loginPageStyle.css">
     <script src="loginPageJs.js"></script> -->
-<body style="background-image: 'assets/loginBackground.jpg';">
-
-  <img id="logo" src="assets/hikingTrailMapper.svg" alt="NotFound"/>
+<body>
+  <img id="logo" src="assets/hikingTrailMapper.svg" alt="NotFound" />
   <div class="Container">
-      <form [formGroup]="logInForm" (ngSubmit)="onSubmit()">
-          <h1 id="forTitle">Log in</h1>
-          <label for="userName" class="labels">Username</label>
-          <input id="userName" class="inputFields" type="text" placeholder="Insert Username" formControlName="userName" autofocus><br>
-          <label for="password" class="labels">Password</label>
-          <input id="password" class="inputFields" type="password" placeholder="Insert Password" formControlName="password"><br>
-          <p class="errorMessage">Wrong username/password Combination</p>
-          <a class="formLink" href="./" id="passRst">Forgot Password?</a><br><br>
-          <button type="submit" id="loginButton">Login</button>
-          <br><br>
-      </form>
-      <a id="signUpLink" routerLink="/register">Dont have an account?</a>
+    <form [formGroup]="logInForm" (ngSubmit)="onSubmit()">
+      <h1 id="forTitle">Log in</h1>
+      <label for="userName" class="labels">Username</label>
+      <input
+        id="userName"
+        class="inputFields"
+        type="text"
+        placeholder="Insert Username"
+        formControlName="userName"
+        autofocus
+      /><br />
+      <label for="password" class="labels">Password</label>
+      <input
+        id="password"
+        class="inputFields"
+        type="password"
+        placeholder="Insert Password"
+        formControlName="password"
+      /><br />
+      <p class="errorMessage">Wrong username/password Combination</p>
+      <a class="formLink" href="./" id="passRst">Forgot Password?</a
+      ><br /><br />
+      <button type="submit" id="loginButton">Login</button>
+      <br /><br />
+    </form>
+    <a id="signUpLink" routerLink="/register">Dont have an account?</a>
   </div>
-
-</body>  
+</body>

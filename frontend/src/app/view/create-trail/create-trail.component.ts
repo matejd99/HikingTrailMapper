@@ -17,8 +17,9 @@ export class CreateTrailComponent implements OnInit {
     trailLength: [''],
     hikeDuration: [''],
     waterAvailability: [''],
-    path: [''],
   });
+
+  public trailPath: any;
 
   private updateTrailId?: number;
 
@@ -40,13 +41,16 @@ export class CreateTrailComponent implements OnInit {
         this.trailService.updateTrail(
           this.userService.logedInUser?.id,
           this.updateTrailId,
-          this.trailForm.value
+          {
+            ...this.trailForm.value,
+            path: JSON.stringify(this.trailPath),
+          }
         );
       } else {
-        this.trailService.postTrail(
-          this.userService.logedInUser?.id,
-          this.trailForm.value
-        );
+        this.trailService.postTrail(this.userService.logedInUser?.id, {
+          ...this.trailForm.value,
+          path: JSON.stringify(this.trailPath),
+        });
       }
     } else {
       alert('Not logged in');
@@ -70,6 +74,7 @@ export class CreateTrailComponent implements OnInit {
             waterAvailability: trail.waterAvailability,
             path: trail.path,
           });
+          this.trailPath = JSON.parse(trail.path);
         },
         (err) => {
           console.error(err);
