@@ -1,0 +1,12 @@
+<div *ngIf="comment" class="comment-item">
+  <div class="userLine">
+    <img class="userImg" [src]="comment.user.imagePath" />
+    <div class="userName">
+      {{ comment.user.firstName }}
+      {{ comment.user.lastName }}
+    </div>
+  </div>
+  <div>
+    {{ comment.comment }}
+  </div>
+</div>

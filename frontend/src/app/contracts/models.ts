@@ -1,3 +1,9 @@
+export interface Comment {
+  id: number;
+  comment: string;
+  user: User;
+}
+
 export interface Trail {
   id: number;
   user: User;
@@ -8,6 +14,7 @@ export interface Trail {
   hikeDuration: number;
   waterAvailability: boolean;
   path: string;
+  comments: Comment[];
 }
 
 export interface User {

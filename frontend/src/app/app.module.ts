@@ -12,6 +12,7 @@ import { TrailsComponent } from './view/trails/trails.component';
 import { CreateTrailComponent } from './view/create-trail/create-trail.component';
 import { TrailItemComponent } from './component/trail-item/trail-item.component';
 import { MapComponent } from './component/map/map.component';
+import { CommentComponent } from './component/comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { MapComponent } from './component/map/map.component';
     CreateTrailComponent,
     TrailItemComponent,
     MapComponent,
+    CommentComponent,
   ],
   imports: [
     BrowserModule,

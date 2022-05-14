@@ -1,5 +1,7 @@
-import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
-import { Trail } from 'src/app/contracts/models';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { Trail, Comment } from 'src/app/contracts/models';
+import { CommentService } from 'src/app/service/comment.service';
 import { UserService } from 'src/app/service/user.service';
 
 @Component({
@@ -10,6 +12,10 @@ import { UserService } from 'src/app/service/user.service';
 export class TrailItemComponent implements OnInit {
   @Input('trail') public trail?: Trail;
 
+  public commentForm = this.fb.group({
+    comment: [''],
+  });
+
   public trailPath: any;
   public canEdit: boolean = false;
 
@@ -19,7 +25,25 @@ export class TrailItemComponent implements OnInit {
     };
   }
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private fb: FormBuilder,
+    private commentService: CommentService
+  ) {}
+
+  public createComment() {
+    if (this.userService.logedInUser && this.trail) {
+      this.commentService
+        .createComment(
+          this.userService.logedInUser.id,
+          this.trail.id,
+          this.commentForm.value
+        )
+        .then((comment) => {
+          this.trail?.comments?.push(comment);
+        });
+    }
+  }
 
   ngOnInit(): void {
     if (this.trail?.path) this.trailPath = JSON.parse(this.trail?.path);

@@ -9,3 +9,19 @@ app-root {
   display: inline-flex;
   width: 100vw;
 }
+
+.userLine {
+  display: flex;
+  align-items: center;
+}
+
+.userImg {
+  height: 30px;
+  width: 30px;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.userName {
+  margin-left: 10px;
+}

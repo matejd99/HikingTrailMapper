@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -19,4 +21,5 @@ public class TrailDto {
     private boolean waterAvailability;
     private UserDto user;
     private String path;
+    private List<CommentDto> comments;
 }

@@ -19,3 +19,7 @@ export interface SignUpRequest {
   userName: string;
   password: string;
 }
+
+export interface CreateCommentRequest {
+  comment: string;
+}

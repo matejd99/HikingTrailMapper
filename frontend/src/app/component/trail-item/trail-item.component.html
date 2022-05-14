@@ -2,11 +2,12 @@
   <app-map [(trail)]="trailPath" [isEditable]="false"></app-map>
 
   <div class="content">
-    <div>
-      <img class="userImg" [src]="trail.user.imagePath" />{{
-        trail.user.firstName
-      }}
-      {{ trail.user.lastName }}
+    <div class="userLine">
+      <img class="userImg" [src]="trail.user.imagePath" />
+      <div class="userName">
+        {{ trail.user.firstName }}
+        {{ trail.user.lastName }}
+      </div>
     </div>
     <div>{{ trail.trailName }}</div>
     <div>{{ trail.trailDescription }}</div>
@@ -15,6 +16,20 @@
       Length: {{ trail.trailLength }}, Duration {{ trail.hikeDuration }}, Water:
       {{ trail.waterAvailability ? "Yes" : "No" }}
     </div>
+    <div class="comments">
+      Comments:
+      <app-comment
+        *ngFor="let item of trail.comments"
+        [comment]="item"
+      ></app-comment>
+    </div>
+    <form
+      [formGroup]="commentForm"
+      (submit)="createComment()"
+      class="add-comment"
+    >
+      <input formControlName="comment" placeholder="Comment" />
+    </form>
     <a routerLink="/update-trail" *ngIf="canEdit" [queryParams]="queryParams"
       >Update trail</a
     >

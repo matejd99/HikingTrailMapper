@@ -6,6 +6,9 @@ import lombok.Setter;
 import me.matej.hikingtrailmapper.dtos.TrailDto;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -41,6 +44,9 @@ public class Trail {
     @Column
     private String path;
 
+    @OneToMany(mappedBy = "trail", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Comment> comments = new ArrayList<>();
+
     public Trail(User user,
                  String trailName,
                  String trailDescription,
@@ -57,6 +63,7 @@ public class Trail {
         this.hikeDuration = hikeDuration;
         this.waterAvailability = waterAvailability;
         this.path = path;
+        this.comments = new ArrayList<>();
     }
 
     public TrailDto toDto() {
@@ -68,6 +75,10 @@ public class Trail {
                 this.getHikeDuration(),
                 this.isWaterAvailability(),
                 this.user.toDto(),
-                this.path);
+                this.path,
+                this.comments.stream()
+                        .map(x -> x.toDto())
+                        .collect(Collectors.toList())
+        );
     }
 }
